@@ -1,18 +1,17 @@
-# Nitro starter
+# InifinitePay Payment Service
 
-Create your API and deploy it anywhere with this Nitro starter.
+Serviço de integração com InfinitePay. Permite redirecionamento para checkout e recuperação de status de pagamento.
 
 ## Getting started
 
 ```bash
-npm install
-npm run dev
+pnpm install
+pnpm run dev
 ```
 
 ## Deploying
 
 ```bash
-npm run build
+pnpm run build
 ```
 
-Then checkout the [Nitro documentation](https://v3.nitro.build/deploy) to learn more about the different deployment presets.
