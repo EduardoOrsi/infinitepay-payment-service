@@ -1,0 +1,38 @@
+{
+  "name": "infinitepay-payment-service",
+  "type": "module",
+  "private": "true",
+  "packageManager": "pnpm@11.4.0",
+  "author": {
+    "name": "Eduardo Orsi",
+    "email": "eduardo.orsifx@gmail.com",
+    "url": "https://github.com/EduardoOrsi"
+  },
+  "imports": {
+    "#*": "./*"
+  },
+  "engines": {
+    "node": "^24"
+  },
+  "scripts": {
+    "build": "nitro build",
+    "dev": "nitro dev",
+    "preview": "nitro preview",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "typecheck": "tsc --noEmit",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^9.0.0",
+    "@types/node": "^25.9.1",
+    "eslint": "^10.4.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.0.5",
+    "nitro": "3.0.260522-beta",
+    "typescript": "^6.0.3"
+  },
+  "lint-staged": {
+    "*": "pnpm lint"
+  }
+}
