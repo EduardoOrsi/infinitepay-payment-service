@@ -14,3 +14,4 @@ sqlite.db
 docs/
 AGENTS.md
 CLAUDE.md
+*.log

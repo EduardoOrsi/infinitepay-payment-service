@@ -1,3 +1,4 @@
+import { HTTPError } from "nitro";
 import { env } from "~/server/utils/env.ts";
 
 export interface InfinitepayItem {
@@ -51,8 +52,12 @@ async function post<TBody, TResponse>(path: string, body: TBody): Promise<TRespo
   });
 
   if (!response.ok) {
-    const text = await response.text().catch(() => "");
-    throw new Error(`InfinitePay ${response.status} ${path}: ${text}`);
+    const data = await response.json().catch(() => null) as { message?: string; errors?: unknown } | null;
+    throw new HTTPError({
+      status: response.status,
+      message: data?.message ?? `InfinitePay error on ${path}`,
+      data: data?.errors,
+    });
   }
 
   return response.json() as Promise<TResponse>;

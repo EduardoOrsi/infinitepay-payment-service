@@ -1,4 +1,4 @@
-import { eq } from "drizzle-orm";
+import { eq, like } from "drizzle-orm";
 import { paymentSessions } from "~/server/db/schema.ts";
 import { db } from "~/server/utils/db.ts";
 
@@ -27,6 +27,27 @@ export const sessionRepository = {
     await db
       .update(paymentSessions)
       .set({ ...data, infinitepayCheckoutId: null, infinitepayCheckoutUrl: null, updatedAt: new Date() })
+      .where(eq(paymentSessions.id, id));
+  },
+
+  // order_nsu enviado à InfinitePay é shopifyCartId sem query string
+  findByOrderNsu(orderNsu: string): Promise<Session | undefined> {
+    return db.query.paymentSessions.findFirst({
+      where: like(paymentSessions.shopifyCartId, `${orderNsu}%`),
+    });
+  },
+
+  async markAsPaid(id: string): Promise<void> {
+    await db
+      .update(paymentSessions)
+      .set({ status: "paid", updatedAt: new Date() })
+      .where(eq(paymentSessions.id, id));
+  },
+
+  async setShopifyOrderId(id: string, shopifyOrderId: string): Promise<void> {
+    await db
+      .update(paymentSessions)
+      .set({ shopifyOrderId, updatedAt: new Date() })
       .where(eq(paymentSessions.id, id));
   },
 };
