@@ -7,6 +7,7 @@ export const paymentSessions = sqliteTable("payment_sessions", {
   amount: integer("amount").notNull(),
   currency: text("currency").notNull().default("BRL"),
   infinitepayCheckoutId: text("infinitepay_checkout_id"),
+  infinitepayCheckoutUrl: text("infinitepay_checkout_url"),
   shopifyOrderId: text("shopify_order_id"),
   cartSnapshot: text("cart_snapshot").notNull(),
   expiresAt: integer("expires_at", { mode: "timestamp" }).notNull(),

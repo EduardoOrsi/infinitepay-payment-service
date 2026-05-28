@@ -1,0 +1,1 @@
+ALTER TABLE `payment_sessions` ADD `infinitepay_checkout_url` text;
