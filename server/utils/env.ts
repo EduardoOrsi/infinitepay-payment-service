@@ -10,6 +10,7 @@ function emptyToUndefined<T extends z.ZodTypeAny>(schema: T) {
 
 const schema = z.object({
   DATABASE_URL: emptyToUndefined(z.string().default("file:dev.db")),
+  TURSO_AUTH_TOKEN: emptyToUndefined(z.string().optional()),
 
   INFINITEPAY_API_URL: emptyToUndefined(z.url()),
   INFINITEPAY_HANDLE: z.string().min(1, "INFINITEPAY_HANDLE é obrigatório"),
@@ -36,6 +37,7 @@ const e = result.data;
 
 export const env = {
   databaseUrl: e.DATABASE_URL,
+  tursoAuthToken: e.TURSO_AUTH_TOKEN,
 
   infinitepayApiUrl: e.INFINITEPAY_API_URL,
   infinitepayHandle: e.INFINITEPAY_HANDLE,
