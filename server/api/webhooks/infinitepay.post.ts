@@ -1,4 +1,3 @@
-import { appendFileSync } from "node:fs";
 import { defineHandler, HTTPError } from "nitro";
 import { z } from "zod";
 import { webhookService } from "~/server/services/webhook.ts";
@@ -39,11 +38,6 @@ export default defineHandler(async (event) => {
       data: parsed.error.flatten().fieldErrors,
     });
   }
-
-  appendFileSync(
-    "webhook.log",
-    `[${new Date().toISOString()}]\n${JSON.stringify(parsed.data, null, 2)}\n${"─".repeat(60)}\n`,
-  );
 
   await webhookService.processInfinitepay(parsed.data);
 
