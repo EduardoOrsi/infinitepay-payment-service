@@ -59,7 +59,7 @@ export const webhookService = {
       await sessionRepository.setShopifyOrderId(session.id, shopifyOrderId);
     }
     catch {
-      // falha silenciosa — sessão já está marcada como paga, shopifyOrderId ficará nulo
+      throw new Error("falha ao receber webhook");
     }
   },
 };

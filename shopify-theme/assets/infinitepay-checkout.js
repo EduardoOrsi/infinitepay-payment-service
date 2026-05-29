@@ -68,19 +68,11 @@
       .then(redirectToCheckout)
       .catch(function (err) {
         console.error('[InfinitePay] Erro:', err.message);
-        console.error('[InfinitePay] URL configurada:', PAYMENT_SERVICE_URL);
         alert('Não foi possível iniciar o pagamento. Tente novamente.');
         setLoading(button, false);
       });
   }
 
-  // -------------------------------------------------------------------------
-  // Intercepta o clique no botão de checkout na fase de CAPTURA.
-  //
-  // O tema Dawn (cart-drawer web component) registra seus handlers na fase
-  // de bubbling. A fase de captura roda antes independente de qual parte do
-  // tema originou o clique (cart drawer, página /cart, mini-cart, etc.).
-  // -------------------------------------------------------------------------
   document.addEventListener('click', function (e) {
     var button = e.target.closest('[name="checkout"]');
     if (!button || button.disabled) return;
@@ -88,6 +80,6 @@
     e.preventDefault();
     e.stopImmediatePropagation();
     handleCheckout(button);
-  }, true); // true = fase de captura
+  }, true); // True define Listener ao rodar na fase de captura e rode antes de qualquer handler.
 
 })();

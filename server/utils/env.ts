@@ -1,9 +1,6 @@
 import process from "node:process";
 import { z } from "zod";
 
-// Converte string vazia para undefined antes da validação,
-// permitindo que campos com default funcionem mesmo quando a variável
-// está declarada mas vazia no .env (ex: INFINITEPAY_API_URL=)
 function emptyToUndefined<T extends z.ZodTypeAny>(schema: T) {
   return z.preprocess(val => (val === "" ? undefined : val), schema);
 }
