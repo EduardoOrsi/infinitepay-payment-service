@@ -12,6 +12,7 @@ const schema = z.object({
   INFINITEPAY_API_URL: emptyToUndefined(z.url()),
   INFINITEPAY_HANDLE: z.string().min(1, "INFINITEPAY_HANDLE é obrigatório"),
   INFINITEPAY_WEBHOOK_URL: emptyToUndefined(z.url().optional()),
+  INFINITEPAY_REDIRECT_URL: emptyToUndefined(z.url().optional()),
   PAYMENT_SESSION_EXPIRY_MINUTES: z.coerce.number().int().positive().default(30),
 
   SHOPIFY_STORE_DOMAIN: emptyToUndefined(z.string().optional()),
@@ -39,6 +40,7 @@ export const env = {
   infinitepayApiUrl: e.INFINITEPAY_API_URL,
   infinitepayHandle: e.INFINITEPAY_HANDLE,
   infinitepayWebhookUrl: e.INFINITEPAY_WEBHOOK_URL,
+  infinitepayRedirectUrl: e.INFINITEPAY_REDIRECT_URL,
 
   paymentSessionExpiryMinutes: e.PAYMENT_SESSION_EXPIRY_MINUTES,
 

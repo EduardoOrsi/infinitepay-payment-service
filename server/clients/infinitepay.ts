@@ -67,7 +67,7 @@ export const infinitepayClient = {
   createLink(input: InfinitepayCreateLinkInput): Promise<InfinitepayCreateLinkResponse> {
     return post<object, InfinitepayCreateLinkResponse>("/links", {
       handle: env.infinitepayHandle,
-      ...(env.infinitepayWebhookUrl ? { webhook_url: env.infinitepayWebhookUrl } : {}),
+      webhook_url: env.infinitepayWebhookUrl,
       ...input,
     });
   },

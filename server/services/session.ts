@@ -41,6 +41,7 @@ async function fetchInfinitepayLink(sessionId: string, input: CreateSessionInput
       description: item.title,
     })),
     order_nsu: input.shopifyCartId.split("?")[0],
+    redirect_url: env.infinitepayRedirectUrl,
   });
 
   // Extrai o lenc= da URL como identificador da fatura
