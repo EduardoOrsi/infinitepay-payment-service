@@ -1,8 +1,9 @@
-import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import { sql } from "drizzle-orm";
+import { integer, sqliteTable, text, uniqueIndex } from "drizzle-orm/sqlite-core";
 
 export const paymentSessions = sqliteTable("payment_sessions", {
   id: text("id").primaryKey(),
-  shopifyCartId: text("shopify_cart_id").notNull().unique(),
+  shopifyCartId: text("shopify_cart_id").notNull(),
   status: text("status", { enum: ["pending", "paid", "failed"] }).notNull().default("pending"),
   amount: integer("amount").notNull(),
   currency: text("currency").notNull().default("BRL"),
@@ -13,7 +14,9 @@ export const paymentSessions = sqliteTable("payment_sessions", {
   expiresAt: integer("expires_at", { mode: "timestamp" }).notNull(),
   createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
   updatedAt: integer("updated_at", { mode: "timestamp" }).notNull(),
-});
+}, table => [
+  uniqueIndex("idx_one_pending_per_cart").on(table.shopifyCartId).where(sql`${table.status} = 'pending'`),
+]);
 
 export const webhookEvents = sqliteTable("webhook_events", {
   id: text("id").primaryKey(),

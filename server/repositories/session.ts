@@ -1,4 +1,4 @@
-import { eq, like } from "drizzle-orm";
+import { and, eq, like } from "drizzle-orm";
 import { paymentSessions } from "~/server/db/schema.ts";
 import { db } from "~/server/utils/db.ts";
 
@@ -8,7 +8,7 @@ export type NewSession = typeof paymentSessions.$inferInsert;
 export const sessionRepository = {
   findByCartId(cartId: string): Promise<Session | undefined> {
     return db.query.paymentSessions.findFirst({
-      where: eq(paymentSessions.shopifyCartId, cartId),
+      where: and(eq(paymentSessions.shopifyCartId, cartId), eq(paymentSessions.status, "pending")),
     });
   },
 

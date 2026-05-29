@@ -1,0 +1,2 @@
+DROP INDEX `payment_sessions_shopify_cart_id_unique`;--> statement-breakpoint
+CREATE UNIQUE INDEX `idx_one_pending_per_cart` ON `payment_sessions` (`shopify_cart_id`) WHERE "payment_sessions"."status" = 'pending';
